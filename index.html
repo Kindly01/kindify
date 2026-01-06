@@ -12,10 +12,10 @@
 <style>
 /* --- THEME: KINDIFY (Teal & Mint) --- */
 :root {
-  --primary: #0d9488;       /* Deep Teal */
-  --primary-light: #ccfbf1; /* Mint background */
-  --secondary: #0f172a;     /* Navy/Black text */
-  --accent: #f59e0b;        /* Gold (for badges) */
+  --primary: #0d9488;       
+  --primary-light: #ccfbf1; 
+  --secondary: #0f172a;     
+  --accent: #f59e0b;        
   --white: #ffffff;
   --gray: #94a3b8;
   --success: #10b981;
@@ -88,7 +88,7 @@ nav h1 { margin: 0; font-size: 1.6rem; color: var(--primary); font-weight: 800; 
 }
 
 .challenge-display {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--primary);
   margin: 20px 0 40px 0;
@@ -107,7 +107,7 @@ button.action-btn:active { transform: scale(0.97); }
 button.action-btn:hover { opacity: 0.9; }
 button.action-btn:disabled { background: var(--gray); cursor: not-allowed; box-shadow: none; }
 
-/* --- BADGES SECTION --- */
+/* --- BADGES --- */
 .badge-section { margin-top: 50px; }
 .badge-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -118,13 +118,12 @@ button.action-btn:disabled { background: var(--gray); cursor: not-allowed; box-s
   background: white; padding: 15px; border-radius: 16px;
   text-align: center; opacity: 0.6; filter: grayscale(100%);
   border: 2px solid transparent; transition: all 0.3s;
-  position: relative;
 }
 
 .badge.unlocked {
   opacity: 1; filter: grayscale(0%);
   border-color: var(--accent);
-  background: #fffbeb; /* Light yellow bg */
+  background: #fffbeb;
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(245, 158, 11, 0.2);
 }
@@ -137,24 +136,18 @@ button.action-btn:disabled { background: var(--gray); cursor: not-allowed; box-s
 }
 .badge.unlocked .badge-req { background: rgba(245, 158, 11, 0.2); color: #92400e; }
 
-/* --- COMMUNITY & OTHER --- */
-.input-group { background: white; padding: 20px; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-input, textarea { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; margin-bottom: 10px; font-family: inherit; }
-input:focus, textarea:focus { outline: none; border-color: var(--primary); }
-
+/* --- COMMUNITY --- */
 .post { background: white; padding: 20px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
 .post strong { color: var(--primary); display: block; margin-bottom: 4px; }
 .post small { color: #94a3b8; font-size: 0.75rem; }
 
-/* --- MISSION PAGE TEXT --- */
+/* --- MISSION BOX --- */
 .mission-box { background: white; padding: 40px; border-radius: 24px; border: 1px solid #e2e8f0; }
 .mission-box h2 { color: var(--primary); margin-bottom: 20px; }
-.mission-box h3 { margin-top: 30px; }
 
-/* --- MOBILE --- */
 @media (max-width: 600px) {
   nav { flex-direction: column; gap: 10px; }
-  .challenge-display { font-size: 1.6rem; }
+  .challenge-display { font-size: 1.5rem; }
 }
 </style>
 </head>
@@ -172,29 +165,23 @@ input:focus, textarea:focus { outline: none; border-color: var(--primary); }
 <main id="home" class="page active">
   <div class="daily-card">
     <div class="streak-pill">🔥 Streak: <span id="streak-display">0</span> Days</div>
-    
-    <div style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); font-weight: 700;">Today's Mission</div>
-    
-    <div id="challenge-text" class="challenge-display">Loading Challenge...</div>
-    
+    <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); font-weight: 700;">Today's Mission</div>
+    <div id="challenge-text" class="challenge-display">Loading...</div>
     <button id="complete-btn" class="action-btn" onclick="completeChallenge()">I Did This Today</button>
     <div id="status-msg" style="margin-top:15px; font-weight:600; color:var(--primary); height:24px;"></div>
   </div>
 
   <div class="badge-section">
     <h3>🏆 Your Badge Collection</h3>
-    <p style="font-size: 0.9rem; color: #666;">Complete daily challenges to unlock these.</p>
-    <div class="badge-grid" id="badge-container">
-      </div>
+    <div class="badge-grid" id="badge-container"></div>
   </div>
 </main>
 
 <main id="community" class="page">
   <div class="daily-card" style="margin-bottom: 30px; padding: 30px;">
     <h3>Kindness Board</h3>
-    <p>Inspire others by sharing what you did.</p>
     <input type="text" id="user-name" placeholder="Your Name">
-    <textarea id="user-msg" rows="3" placeholder="I helped my neighbor by..."></textarea>
+    <textarea id="user-msg" rows="3" placeholder="Share your story..."></textarea>
     <button class="action-btn" style="padding: 10px 20px; font-size: 1rem;" onclick="addPost()">Post Story</button>
   </div>
   <div id="posts-container"></div>
@@ -203,39 +190,47 @@ input:focus, textarea:focus { outline: none; border-color: var(--primary); }
 <main id="about" class="page">
   <div class="mission-box">
     <h2>The Kindify Mission</h2>
-    
-    <p>
-      Kindify is built around the idea that kindness becomes more powerful when it is practiced consistently. The platform encourages small, intentional actions that fit naturally into everyday life and add up over time.
-    </p>
-
-    <p>
-      Each challenge is designed to move kindness beyond intention and into action. By focusing on real interactions and shared experiences, Kindify helps people build stronger connections and create positive impact in their communities.
-    </p>
-
+    <p>Kindify is built around the idea that kindness becomes more powerful when it is practiced consistently. The platform encourages small, intentional actions that fit naturally into everyday life and add up over time.</p>
+    <p>Each challenge is designed to move kindness beyond intention and into action. By focusing on real interactions and shared experiences, Kindify helps people build stronger connections and create positive impact in their communities.</p>
     <h3>Why badges?</h3>
-    <p>
-      Because consistency is easier when progress is visible. Badges help track your journey and reinforce the habit of showing up with kindness, from your first step to becoming a Kindness Legend.
-    </p>
+    <p>Because consistency is easier when progress is visible. Badges help track your journey and reinforce the habit of showing up with kindness, from your first step to becoming a Kindness Legend.</p>
   </div>
 </main>
 
 <script>
-  /* --- 1. DATA & STATE --- */
-  // Strictly external kindness challenges
   const challenges = [
     "Give a genuine compliment to a stranger.",
-    "Pick up litter on your street.",
-    "Text a friend you haven't spoken to in a while.",
-    "Let someone cut in front of you in line/traffic.",
-    "Leave a generous tip (even for small service).",
-    "Hold the door open for everyone you see today.",
-    "Donate a small amount to a local charity.",
-    "Write a positive review for a local business.",
-    "Help someone carry their groceries.",
-    "Listen to someone without interrupting."
+    "Pick up five pieces of litter on your walk today.",
+    "Text a friend you haven't spoken to in a while to say hi.",
+    "Let someone cut in front of you in line or in traffic.",
+    "Leave a generous tip for a service worker.",
+    "Hold the door open for every person you see today.",
+    "Donate a few items to a local food pantry or shelter.",
+    "Write a positive review for a local business you love.",
+    "Help someone carry their heavy bags or groceries.",
+    "Listen to someone today without interrupting or judging.",
+    "Send an anonymous bouquet or treat to a neighbor's porch.",
+    "Offer to take a photo for a group of people at a park.",
+    "Write a 'thank you' note for your mail carrier or delivery driver.",
+    "Compliment a coworker or classmate on their hard work.",
+    "Donate old books to a 'Little Free Library' or school.",
+    "Leave a kind comment on a social media post you enjoyed.",
+    "Pay for the coffee or snack of the person behind you.",
+    "Help a neighbor with yard work or taking out their trash.",
+    "Share a helpful resource or article with someone who needs it.",
+    "Tell a manager about a staff member who gave great service.",
+    "Bring a healthy treat or snack to share with others.",
+    "Offer your seat to someone else on public transit.",
+    "Send a digital 'thank you' card to a former teacher or mentor.",
+    "Put away stray shopping carts in a parking lot.",
+    "Plant something—even a small flower—in a public space.",
+    "Compliment a parent on how well-behaved their child is.",
+    "Offer to help a friend with a chore or errand they dislike.",
+    "Leave a kind note in a library book for the next reader.",
+    "Support a small artist or creator by sharing their work.",
+    "Make an effort to remember and use a new person's name today."
   ];
 
-  // Badge Definitions with displayed requirements
   const badgeData = [
     { id: 'b1', icon: '🌱', name: 'The Seed', req: 1, type: 'total', label: '1 Day' },
     { id: 'b2', icon: '🔥', name: 'On Fire', req: 3, type: 'streak', label: '3 Day Streak' },
@@ -244,117 +239,60 @@ input:focus, textarea:focus { outline: none; border-color: var(--primary); }
     { id: 'b5', icon: '👑', name: 'Legend', req: 30, type: 'total', label: '30 Days' }
   ];
 
-  // Load User Data
-  let userStats = JSON.parse(localStorage.getItem('kindifyStats')) || {
-    streak: 0,
-    totalCompleted: 0,
-    lastDate: null
-  };
-
+  let userStats = JSON.parse(localStorage.getItem('kindifyStats')) || { streak: 0, totalCompleted: 0, lastDate: null };
   const today = new Date().toDateString();
 
-  /* --- 2. INITIALIZATION --- */
   function init() {
-    // Set daily challenge based on date (so everyone gets the same one)
-    const challengeIndex = new Date().getDate() % challenges.length;
+    const dayOfMonth = new Date().getDate();
+    const challengeIndex = (dayOfMonth - 1) % challenges.length;
     document.getElementById('challenge-text').innerText = challenges[challengeIndex];
     document.getElementById('streak-display').innerText = userStats.streak;
-
-    // Check if already done today
-    if (userStats.lastDate === today) {
-      disableButton("Come back tomorrow for more!");
-    }
-
+    if (userStats.lastDate === today) disableButton("Come back tomorrow!");
     renderBadges();
     renderPosts();
   }
 
-  /* --- 3. ACTIONS --- */
   function completeChallenge() {
     if (userStats.lastDate === today) return;
-
-    // Update Stats
     userStats.streak++;
     userStats.totalCompleted++;
     userStats.lastDate = today;
-    
-    // Save
     localStorage.setItem('kindifyStats', JSON.stringify(userStats));
-
-    // UI Updates
     document.getElementById('streak-display').innerText = userStats.streak;
     disableButton("Challenge Completed! 🎉");
-    
-    // Check for new badges
-    checkBadges();
+    renderBadges();
   }
 
   function disableButton(msg) {
     const btn = document.getElementById('complete-btn');
-    const status = document.getElementById('status-msg');
     btn.disabled = true;
     btn.innerText = "Done ✔";
-    status.innerText = msg;
+    document.getElementById('status-msg').innerText = msg;
   }
 
-  /* --- 4. BADGE SYSTEM --- */
   function renderBadges() {
     const container = document.getElementById('badge-container');
     container.innerHTML = '';
-
     badgeData.forEach(badge => {
-      // Determine if unlocked
-      let isUnlocked = false;
-      if (badge.type === 'total' && userStats.totalCompleted >= badge.req) isUnlocked = true;
-      if (badge.type === 'streak' && userStats.streak >= badge.req) isUnlocked = true;
-
+      let unlocked = (badge.type === 'total' && userStats.totalCompleted >= badge.req) || (badge.type === 'streak' && userStats.streak >= badge.req);
       const div = document.createElement('div');
-      div.className = `badge ${isUnlocked ? 'unlocked' : ''}`;
-      // Added badge-req div to display requirement
-      div.innerHTML = `
-        <span class="badge-icon">${badge.icon}</span>
-        <div class="badge-name">${badge.name}</div>
-        <div class="badge-req">Req: ${badge.label}</div>
-      `;
+      div.className = `badge ${unlocked ? 'unlocked' : ''}`;
+      div.innerHTML = `<span class="badge-icon">${badge.icon}</span><div class="badge-name">${badge.name}</div><div class="badge-req">${badge.label}</div>`;
       container.appendChild(div);
     });
   }
 
-  function checkBadges() {
-    // Re-render to show unlocked badges immediately
-    renderBadges();
-    
-    // Check for specific unlocks to alert user
-    badgeData.forEach(badge => {
-       if (badge.type === 'total' && userStats.totalCompleted === badge.req) {
-           alert(`You unlocked the ${badge.name} badge!`);
-       }
-       if (badge.type === 'streak' && userStats.streak === badge.req) {
-           alert(`You unlocked the ${badge.name} badge!`);
-       }
-    });
-  }
-
-  /* --- 5. NAVIGATION --- */
   function switchPage(pageId, link) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
-    
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active-link'));
     link.classList.add('active-link');
   }
 
-  /* --- 6. COMMUNITY --- */
   function renderPosts() {
     const container = document.getElementById('posts-container');
     const posts = JSON.parse(localStorage.getItem('kindifyPosts')) || [];
-    container.innerHTML = '';
-    
-    if(posts.length === 0) {
-      container.innerHTML = '<div style="text-align:center; color:#999; margin-top:20px">No stories yet. Be the first!</div>';
-      return;
-    }
-
+    container.innerHTML = posts.length ? '' : '<p style="text-align:center; color:#999">No stories yet.</p>';
     posts.forEach(post => {
       const div = document.createElement('div');
       div.className = 'post';
@@ -366,20 +304,15 @@ input:focus, textarea:focus { outline: none; border-color: var(--primary); }
   function addPost() {
     const name = document.getElementById('user-name').value;
     const msg = document.getElementById('user-msg').value;
-    if(!name || !msg) return alert("Please fill out both fields");
-
+    if(!name || !msg) return;
     const posts = JSON.parse(localStorage.getItem('kindifyPosts')) || [];
     posts.unshift({ name, msg, date: new Date().toLocaleDateString() });
     localStorage.setItem('kindifyPosts', JSON.stringify(posts));
-    
     document.getElementById('user-msg').value = '';
     renderPosts();
-    alert("Thanks for sharing!");
   }
 
-  // Run on Load
   init();
-
 </script>
 </body>
 </html>
